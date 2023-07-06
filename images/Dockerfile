@@ -11,4 +11,4 @@ COPY . /app
 RUN ./gradlew build
 
 # Set the entrypoint
-ENTRYPOINT ["java", "-jar", "build/libs/your-project.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/terraform2023-1.0.jar"]
