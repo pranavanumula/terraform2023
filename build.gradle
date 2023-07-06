@@ -1,0 +1,23 @@
+// Define the project details
+group 'com.example'
+version '1.0'
+
+// Apply the Java plugin (replace 'java' with the appropriate plugin for your project)
+apply plugin: 'java'
+
+// Set the source and target compatibility for Java
+sourceCompatibility = 19
+targetCompatibility = 19
+
+// Define dependencies
+dependencies {
+    // Example dependencies
+//    implementation 'com.example:library:1.0'
+//    testImplementation 'junit:junit:4.12'
+}
+
+// Define the repositories to fetch dependencies from
+repositories {
+    // Example repository
+    mavenCentral()
+}
