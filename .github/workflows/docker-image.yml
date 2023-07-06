@@ -21,3 +21,8 @@ jobs:
           file: images/Dockerfile
           push: false
           tags: your-docker-image:latest
+      - name: Upload Docker image as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Docker Image
+          path: images
