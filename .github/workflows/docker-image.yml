@@ -15,7 +15,7 @@ jobs:
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
       - name: Build Docker image
-        run: docker build -t your-docker-image:latest -f path/to/Dockerfile .
+        run: docker build -t your-docker-image:latest -f images/Dockerfile .
 #        uses: docker/build-push-action@v2
 #        with:
 #          context: .
