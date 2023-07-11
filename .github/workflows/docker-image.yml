@@ -4,26 +4,33 @@ on:
   push:
     branches:
       - main
-
+env:
+  GCP_PROJECT_ID: "global-axe-391317"
+  GCR_LOGIN_URL: "https://us.gcr.io"
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 'use gcloud cli'
+        shell : bash
+        run: |
+          gcloud info
+          echo "==============================================="
+          gcloud config set project ${{env.GCP_PROJECT_ID}}
+          echo "==============================================="
+          gcloud info
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
       - name: Build Docker image
-        run: docker build -t your-docker-image:latest -f images/Dockerfile .
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          file: images/Dockerfile
-#          push: false
-#          tags: your-docker-image:latest
+        run: |- 
+          docker build -t your-docker-image:latest -f images/Dockerfile .
+          docker images
       - name: Upload Docker image as artifact
         uses: actions/upload-artifact@v2
         with:
           name: Docker Image
           path: .
+          retention-days: 7
