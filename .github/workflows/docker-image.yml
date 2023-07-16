@@ -36,7 +36,7 @@ jobs:
       - name: Authenticate using gcloud
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_AUTH }}
-        run: gcloud auth application-default login --quiet
+        run: gcloud auth application-default login --quiet --password-file=password.txt
       - name: Build Docker image
         run: |- 
           docker build -t your-docker-image:latest -f images/Dockerfile .
