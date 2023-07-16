@@ -33,6 +33,8 @@ jobs:
           install_app_engine: true
           install_kubectl: true
           install_beta_components: true
+      - name: Authenticate using gcloud
+        run: gcloud auth application-default login
       - name: Build Docker image
         run: |- 
           docker build -t your-docker-image:latest -f images/Dockerfile .
