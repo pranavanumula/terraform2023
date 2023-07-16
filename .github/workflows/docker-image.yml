@@ -24,6 +24,15 @@ jobs:
         uses: actions/checkout@v2
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.3.0
+        with:
+          project_id: global-axe-391317
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+          export_default_credentials: true
+          install_app_engine: true
+          install_kubectl: true
+          install_beta_components: true
       - name: Build Docker image
         run: |- 
           docker build -t your-docker-image:latest -f images/Dockerfile .
