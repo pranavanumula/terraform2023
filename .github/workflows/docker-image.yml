@@ -16,7 +16,7 @@ jobs:
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
-          service_account: 'terraformbucket@global-axe-391317.iam.gserviceaccount.com'
+          credentials_json: '${{ secrets.GCLOUD_AUTH }}'
       - name: 'use gcloud cli'
         shell : bash
         run: |
