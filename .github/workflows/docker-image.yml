@@ -42,6 +42,14 @@ jobs:
           install_app_engine: true
           install_kubectl: true
           install_beta_components: true
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.15.5 # Replace with the desired Terraform version
+      - name: Initialize Terraform
+        run: terraform init
+      - name: Apply Terraform changes
+        run: terraform apply -auto-approve
       - name: Build Docker image
         run: |- 
           docker build -t your-docker-image:latest -f images/Dockerfile .
