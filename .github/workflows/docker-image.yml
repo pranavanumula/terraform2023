@@ -36,9 +36,7 @@ jobs:
           install_beta_components: true
       - name: Authenticate with Google Cloud
         run: |
-          echo "${{ secrets.GCLOUD_AUTH }}" > key.json
-          sed -i 's/\\/\\\\/g' key.json
-          gcloud auth activate-service-account --key-file=key.json --quiet
+          echo "${{ secrets.GCLOUD_AUTH }}" | gcloud auth activate-service-account --key-file=- --quiet
 
       - name: Configure Google Cloud project
         run: |
