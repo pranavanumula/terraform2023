@@ -7,6 +7,7 @@ on:
 env:
   GCP_PROJECT_ID: "global-axe-391317"
   GCR_LOGIN_URL: "https://us.gcr.io"
+  GCP_ZONE: "us-central1-a"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,15 +36,15 @@ jobs:
           install_beta_components: true
       - name: Authenticate with Google Cloud
         run: |
-          echo "${{ secrets.GCLOUD_AUTH }}" | base64 -d > key.json
+          echo -n "${{ secrets.GCLOUD_AUTH }}" > key.json
           gcloud auth activate-service-account --key-file=key.json --quiet
 
       - name: Configure Google Cloud project
         run: |
           gcloud config configurations create my-config --no-activate --quiet
           gcloud auth configure-docker --quiet
-          gcloud config set project global-axe-391317 --configuration my-config
-          gcloud config set compute/zone us-central1-a --configuration my-config
+          gcloud config set project ${{ env.GCP_PROJECT_ID }} --configuration my-config
+          gcloud config set compute/zone ${{ env.GCP_ZONE }} --configuration my-config
 
       - name: Initialize Google Cloud SDK
         run: gcloud init --configuration my-config --console-only --skip-diagnostics --quiet
