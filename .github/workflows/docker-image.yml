@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          service_account: 'terraformbucket@global-axe-391317.iam.gserviceaccount.com'
       - name: 'use gcloud cli'
         shell : bash
         run: |
