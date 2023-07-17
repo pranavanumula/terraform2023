@@ -42,8 +42,8 @@ jobs:
         run: |
           gcloud config configurations create my-config --no-activate --quiet
           gcloud auth configure-docker --quiet
-          gcloud config set project PROJECT_ID --configuration my-config
-          gcloud config set compute/zone ZONE --configuration my-config
+          gcloud config set project global-axe-391317 --configuration my-config
+          gcloud config set compute/zone us-central1-a --configuration my-config
 
       - name: Initialize Google Cloud SDK
         run: gcloud init --configuration my-config --console-only --skip-diagnostics --quiet
