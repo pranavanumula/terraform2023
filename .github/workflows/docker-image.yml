@@ -33,10 +33,18 @@ jobs:
           install_app_engine: true
           install_kubectl: true
           install_beta_components: true
-      - name: Authenticate using gcloud
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_AUTH }}
-        run: gcloud auth application-default login --quiet --no-browser
+      - name: Authenticate with Google Cloud
+        run: gcloud auth activate-service-account --key-file=${{ secrets.GCLOUD_AUTH }} --quiet
+
+      - name: Configure Google Cloud project
+        run: |
+          gcloud config configurations create my-config --no-activate --quiet
+          gcloud auth configure-docker --quiet
+          gcloud config set project PROJECT_ID --configuration my-config
+          gcloud config set compute/zone ZONE --configuration my-config
+
+      - name: Initialize Google Cloud SDK
+        run: gcloud init --configuration my-config --console-only --skip-diagnostics --quiet
       - name: Build Docker image
         run: |- 
           docker build -t your-docker-image:latest -f images/Dockerfile .
